@@ -20,6 +20,7 @@ import {
 import { PotholeCluster, Status } from '@/lib/types';
 import { cn, formatDate } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/components/providers/language-provider';
 
 interface DetailModalProps {
   pothole: PotholeCluster;
@@ -28,6 +29,7 @@ interface DetailModalProps {
 }
 
 export default function DetailModal({ pothole, onClose, onStatusChange }: DetailModalProps) {
+  const { t } = useLanguage();
   const [currentImage, setCurrentImage] = useState(0);
 
   const statusColors = {
@@ -87,7 +89,7 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
             <div className="flex items-center justify-between mb-auto">
                <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
                   <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-[10px] font-black text-white uppercase tracking-widest">Evidence #00{currentImage + 1}</span>
+                  <span className="text-[10px] font-black text-white uppercase tracking-widest">{t('dashboard.modal.evidence')} #00{currentImage + 1}</span>
                </div>
                <div className="text-[10px] font-black text-white/60 uppercase tracking-widest">CAM-ID-WX44</div>
             </div>
@@ -133,12 +135,12 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
             
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 mt-6">
                <div className="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-                 <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Dashcam Timestamp</span>
+                 <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{t('dashboard.modal.dashcam_timestamp')}</span>
                  <span className="text-xs font-black text-white">{formatDate(pothole.lastDetected)}</span>
                </div>
                <div className="flex items-center justify-between">
-                 <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">Confidence Score</span>
-                 <span className="text-xs font-black text-emerald-400">98.4% Accuracy</span>
+                 <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest">{t('dashboard.modal.confidence_score')}</span>
+                 <span className="text-xs font-black text-emerald-400">98.4% {t('dashboard.modal.accuracy')}</span>
                </div>
             </div>
           </div>
@@ -149,15 +151,15 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
                <span className={cn("text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border", statusColors[pothole.status])}>
-                 {pothole.status.replace('-', ' ')}
+                 {t(`dashboard.modal.status.${pothole.status.replace('-', '_')}`)}
                </span>
                <span className={cn("text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full", priorityColors[pothole.priority])}>
-                 {pothole.priority} Priority
+                 {t(`dashboard.modal.priority.${pothole.priority}`)}
                </span>
             </div>
             
              <h2 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-none mb-3">
-              {pothole.locationName}
+              {t(`data.locations.${pothole.locationName}`)}
             </h2>
             <div className="flex items-center gap-4 text-slate-400 font-bold text-xs">
               <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-blue-500" /> {pothole.city}, {pothole.state}</span>
@@ -169,55 +171,55 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
           <div className="grid grid-cols-2 gap-4 mb-8">
             <div className="bg-blue-50/50 dark:bg-blue-900/20 p-5 rounded-3xl border border-blue-100/50 dark:border-blue-800/30 group/stat">
                <div className="flex items-center gap-2 text-blue-600/60 dark:text-blue-400/80 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-blue-600 dark:group-hover/stat:text-blue-400">
-                 <Users className="w-3.5 h-3.5" /> Unique Vehicles
+                 <Users className="w-3.5 h-3.5" /> {t('dashboard.modal.unique_vehicles')}
                </div>
                <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{pothole.uniqueVehicleCount}</div>
-               <p className="text-[10px] font-bold text-blue-400 dark:text-blue-500 mt-1 uppercase">Primary Priority Driver</p>
+               <p className="text-[10px] font-bold text-blue-400 dark:text-blue-500 mt-1 uppercase">{t('dashboard.modal.primary_driver')}</p>
             </div>
             <div className="bg-slate-50 dark:bg-slate-800 p-5 rounded-3xl border border-slate-100 dark:border-slate-700 group/stat">
                <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-slate-600 dark:group-hover/stat:text-slate-400">
-                 <Layers className="w-3.5 h-3.5" /> Incident Cluster
+                 <Layers className="w-3.5 h-3.5" /> {t('dashboard.modal.incident_cluster')}
                </div>
                <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{pothole.totalReports}</div>
-               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase">Total Reports Sweded</p>
+               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase">{t('dashboard.modal.total_reports_sweded')}</p>
             </div>
           </div>
 
           <div className="space-y-6 mb-10 text-sm">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-               <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Clock className="w-4 h-4" /> First Detected</span>
+               <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Clock className="w-4 h-4" /> {t('dashboard.modal.first_detected')}</span>
                <span className="font-bold text-slate-700 dark:text-slate-300">{formatDate(pothole.firstDetected)}</span>
             </div>
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-               <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Navigation className="w-4 h-4" /> Assigned Team</span>
-               <span className="font-bold text-blue-600 dark:text-blue-400">{pothole.assignedTeam || 'Unassigned'}</span>
+               <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Navigation className="w-4 h-4" /> {t('dashboard.modal.assigned_team')}</span>
+               <span className="font-bold text-blue-600 dark:text-blue-400">{pothole.assignedTeam || t('dashboard.modal.unassigned')}</span>
             </div>
             <div className="pt-2">
                <h4 className="font-black text-slate-800 dark:text-slate-200 text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
-                 <CheckCircle className="w-4 h-4 text-emerald-500" /> Administrative Notes
+                 <CheckCircle className="w-4 h-4 text-emerald-500" /> {t('dashboard.modal.admin_notes')}
                </h4>
                <p className="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl text-slate-600 dark:text-slate-300 font-medium italic border border-slate-100 dark:border-slate-700">
-                 "{pothole.notes || 'No administrative notes added yet.'}"
+                 "{pothole.notes || t('dashboard.modal.no_notes')}"
                </p>
             </div>
           </div>
 
           <div className="mt-auto flex flex-col sm:flex-row gap-3">
              <div className="flex-1 space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Change Status</label>
+                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{t('dashboard.modal.change_status')}</label>
                  <select 
                   value={pothole.status}
                   onChange={(e) => onStatusChange(pothole.id, e.target.value as Status)}
                   className="w-full h-12 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-sm"
                 >
-                  <option value="reported">Reported</option>
-                  <option value="in-progress">In Progress</option>
-                  <option value="repaired">Repaired</option>
+                  <option value="reported">{t('dashboard.modal.status.reported')}</option>
+                  <option value="in-progress">{t('dashboard.modal.status.in_progress')}</option>
+                  <option value="repaired">{t('dashboard.modal.status.repaired')}</option>
                 </select>
              </div>
              
              <button className="sm:w-1/3 h-12 mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition-all flex items-center justify-center gap-2">
-                <Truck className="w-4 h-4" /> Dispatch Team
+                <Truck className="w-4 h-4" /> {t('dashboard.modal.dispatch_team')}
              </button>
           </div>
         </div>

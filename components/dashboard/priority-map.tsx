@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { PotholeCluster } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { MapPin, Info, Navigation } from 'lucide-react';
+import { useLanguage } from '@/components/providers/language-provider';
 
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 
@@ -30,6 +31,7 @@ function MapController({ center }: { center: [number, number] }) {
 }
 
 export default function PriorityMap({ data, selectedId, onMarkerClick }: PriorityMapProps) {
+  const { t } = useLanguage();
   const [L, setL] = useState<any>(null);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -47,7 +49,7 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
     return (
       <div className="w-full h-full bg-slate-100 dark:bg-slate-800/50 rounded-3xl flex flex-col items-center justify-center border-2 border-white dark:border-slate-800 shadow-inner animate-pulse">
         <Navigation className="w-12 h-12 text-slate-300 dark:text-slate-600 animate-bounce" />
-        <p className="mt-4 font-bold text-slate-400 dark:text-slate-500 capitalize">Initializing Map Engine...</p>
+        <p className="mt-4 font-bold text-slate-400 dark:text-slate-500 capitalize">{t('dashboard.map.initializing')}</p>
       </div>
     );
   }
@@ -106,11 +108,11 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
                     pothole.priority === 'medium' ? "bg-orange-100 text-orange-600" :
                     "bg-emerald-100 text-emerald-600"
                   )}>
-                    {pothole.priority} Priority
+                    {t(`dashboard.modal.priority.${pothole.priority}`)}
                   </span>
                   <span className="text-[10px] font-bold text-slate-400 capitalize">{pothole.areaType}</span>
                 </div>
-                <h4 className="font-bold text-slate-800 text-sm mb-1">{pothole.locationName}</h4>
+                <h4 className="font-bold text-slate-800 text-sm mb-1">{t(`data.locations.${pothole.locationName}`)}</h4>
                 <div className="flex items-center gap-3 text-xs text-slate-500 font-semibold mb-2">
                   <span className="flex items-center gap-1"><Navigation className="w-3 h-3" /> {pothole.city}</span>
                   <span className="flex items-center gap-1"><Info className="w-3 h-3" /> {pothole.uniqueVehicleCount} Detects</span>
@@ -119,7 +121,7 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
                   onClick={() => onMarkerClick(pothole)}
                   className="w-full py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold uppercase rounded-lg transition-colors"
                 >
-                  View Full Details
+                  {t('dashboard.map.view_details')}
                 </button>
               </div>
             </Popup>
@@ -129,19 +131,19 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
 
       {/* Map Legend Overlay */}
       <div className="absolute bottom-6 left-6 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl p-4 hidden md:block">
-        <h5 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Priority Map Legend</h5>
+        <h5 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">{t('dashboard.map.legend_title')}</h5>
         <div className="space-y-2.5">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm shadow-red-200 dark:shadow-red-900/50" />
-            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">High (10+ Vehicles)</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{t('dashboard.map.high')} (10+ {t('dashboard.map.vehicles')})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-orange-500 shadow-sm shadow-orange-200 dark:shadow-orange-900/50" />
-            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Medium (4-9 Vehicles)</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{t('dashboard.map.medium')} (4-9 {t('dashboard.map.vehicles')})</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-sm shadow-emerald-200 dark:shadow-emerald-900/50" />
-            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Low (1-3 Vehicles)</span>
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{t('dashboard.map.low')} (1-3 {t('dashboard.map.vehicles')})</span>
           </div>
         </div>
       </div>

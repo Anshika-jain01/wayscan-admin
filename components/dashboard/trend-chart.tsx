@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 import { motion } from 'framer-motion';
 import { BarChart3, ArrowUpRight, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/components/providers/language-provider';
 
 const data = [
   { name: 'Week 1', detected: 45, repaired: 32 },
@@ -27,6 +28,7 @@ const data = [
 ];
 
 export default function TrendChart() {
+  const { t } = useLanguage();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
@@ -39,9 +41,9 @@ export default function TrendChart() {
              <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <BarChart3 className="w-4 h-4" />
              </div>
-             <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">System Performance Trend</h3>
+             <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">{t('dashboard.chart.title')}</h3>
           </div>
-          <p className="text-sm font-semibold text-slate-400 dark:text-slate-500">Comparing weekly detections vs successful resolutions</p>
+          <p className="text-sm font-semibold text-slate-400 dark:text-slate-500">{t('dashboard.chart.subtitle')}</p>
         </div>
         
         <div className="flex items-center gap-3">
@@ -93,14 +95,14 @@ export default function TrendChart() {
               wrapperStyle={{ paddingBottom: '30px', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}
             />
             <Bar 
-              name="New Detections" 
+              name={t('dashboard.chart.new_detections')} 
               dataKey="detected" 
               fill="#3b82f6" 
               radius={[6, 6, 0, 0]} 
               barSize={20}
             />
             <Bar 
-              name="Repaired Issues" 
+              name={t('dashboard.chart.repaired_issues')} 
               dataKey="repaired" 
               fill="#10b981" 
               radius={[6, 6, 0, 0]} 
@@ -114,15 +116,15 @@ export default function TrendChart() {
          <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
                <div className="w-2 h-2 rounded-full bg-blue-500" />
-               Current AI Alert Threshold: 5m
+               {t('dashboard.chart.ai_alert_threshold')}: 5m
             </div>
             <div className="flex items-center gap-1.5">
                <div className="w-2 h-2 rounded-full bg-emerald-500" />
-               Target SLA: 72 Hours
+               {t('dashboard.chart.target_sla')}: 72 Hours
             </div>
          </div>
          <button className="text-blue-600 hover:text-blue-700 font-black uppercase tracking-widest flex items-center gap-1">
-            Download Report <ArrowUpRight className="w-3.5 h-3.5" />
+            {t('dashboard.chart.download_report')} <ArrowUpRight className="w-3.5 h-3.5" />
          </button>
       </div>
     </motion.div>

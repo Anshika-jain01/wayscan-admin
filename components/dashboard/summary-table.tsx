@@ -3,6 +3,7 @@
 import React from 'react';
 import { PotholeCluster } from '@/lib/types';
 import { cn, formatDate } from '@/lib/utils';
+import { useLanguage } from '@/components/providers/language-provider';
 import { MapPin, Users, Calendar, ArrowRight, ExternalLink } from 'lucide-react';
 
 interface SummaryTableProps {
@@ -12,6 +13,7 @@ interface SummaryTableProps {
 }
 
 export default function SummaryTable({ data, selectedId, onSelect }: SummaryTableProps) {
+  const { t } = useLanguage();
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm h-full flex flex-col">
       <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
@@ -19,10 +21,10 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
           <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
             <Users className="w-4 h-4" />
           </div>
-          <h3 className="font-bold text-slate-800 dark:text-slate-100">Recent Detections</h3>
+          <h3 className="font-bold text-slate-800 dark:text-slate-100">{t('dashboard.table.title')}</h3>
         </div>
         <span className="text-[10px] font-black text-slate-400 uppercase bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-md border border-slate-100 dark:border-slate-700">
-          Showing {data.length} reports
+          {t('dashboard.table.showing_reports', { count: data.length })}
         </span>
       </div>
 
@@ -33,7 +35,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4 border border-slate-100">
                 <MapPin className="text-slate-200 w-8 h-8" />
               </div>
-              <p className="font-bold text-slate-400 dark:text-slate-500">No reports found for selected filters</p>
+              <p className="font-bold text-slate-400 dark:text-slate-500">{t('dashboard.table.no_reports')}</p>
             </div>
           ) : (
             <div className="divide-y divide-slate-50 dark:divide-slate-800/50">
@@ -56,7 +58,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
                         item.priority === 'medium' ? "bg-orange-100 text-orange-600" :
                         "bg-emerald-100 text-emerald-600"
                       )}>
-                        {item.priority}
+                        {t(`dashboard.modal.priority.${item.priority}`)}
                       </span>
                       <span className={cn(
                         "text-[9px] font-bold text-slate-400 flex items-center gap-1"
@@ -67,7 +69,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
                     </div>
                     
                     <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm truncate mb-1">
-                      {item.locationName}
+                      {t(`data.locations.${item.locationName}`)}
                     </h4>
                     
                     <div className="flex items-center gap-4">
@@ -81,7 +83,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
                           item.status === 'repaired' ? "bg-emerald-500" :
                           item.status === 'in-progress' ? "bg-blue-500" : "bg-orange-500"
                         )} />
-                        {item.status.replace('-', ' ')}
+                        {t(`dashboard.modal.status.${item.status.replace('-', '_')}`)}
                       </div>
                     </div>
                   </div>
@@ -99,7 +101,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
       {data.length > 0 && (
         <div className="p-3 border-t border-slate-100 dark:border-slate-800">
            <button className="w-full py-2.5 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
-             View Full Report <ExternalLink className="w-3 h-3" />
+             {t('dashboard.table.view_full_report')} <ExternalLink className="w-3 h-3" />
            </button>
         </div>
       )}

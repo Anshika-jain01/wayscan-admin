@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Calendar, RefreshCw, MessageSquare, Sun, Moon } from 'lucide-react';
+import { Search, Bell, Calendar, RefreshCw, MessageSquare, Sun, Moon, Languages } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useLanguage } from '@/components/providers/language-provider';
 import { cn } from '@/lib/utils';
 
 export default function Header() {
   const pendingSync = 23;
   const { theme, setTheme } = useTheme();
+  const { t, locale, setLocale } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch for theme toggle
@@ -25,7 +27,7 @@ export default function Header() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
             <input 
               type="text" 
-              placeholder="Search by city, area, or coordinates..." 
+              placeholder={t('header.search_placeholder')} 
               className="w-full h-11 pl-10 pr-4 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm dark:text-slate-100 dark:placeholder-slate-400"
             />
           </div>
@@ -37,10 +39,10 @@ export default function Header() {
           {/* Dashboard Stats / Date */}
           <div className="hidden lg:flex items-center gap-4 border-r border-slate-200 dark:border-slate-700 pr-6 mr-2">
             <div className="flex flex-col items-end">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Current Date</span>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t('header.current_date')}</span>
               <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
                 <Calendar className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-                {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                {new Date().toLocaleDateString(locale === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
               </span>
             </div>
           </div>
@@ -54,8 +56,8 @@ export default function Header() {
           )}>
             <RefreshCw className={cn("w-4 h-4", pendingSync > 0 && "animate-spin-slow")} />
             <div className="flex flex-col items-start leading-none">
-              <span className="text-[10px] font-bold uppercase tracking-tight">Sync Status</span>
-              <span className="text-xs font-bold">{pendingSync} Pending</span>
+              <span className="text-[10px] font-bold uppercase tracking-tight">{t('header.pending_sync').split(' ')[1] || 'Sync'} Status</span>
+              <span className="text-xs font-bold">{pendingSync > 0 ? `${pendingSync} ${t('header.pending_sync').split(' ')[0]}` : t('header.all_synced')}</span>
             </div>
           </button>
 
@@ -64,9 +66,20 @@ export default function Header() {
             <div className="w-[40px] h-[40px] flex items-center justify-center">
               {mounted && (
                 <button 
+                  onClick={() => setLocale(locale === 'en' ? 'hi' : 'en')}
+                  className="p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/80 text-blue-500 font-bold hover:text-slate-800 dark:text-blue-400 dark:hover:text-slate-200 transition-colors uppercase text-xs tracking-widest"
+                  title={t('header.toggle_lang')}
+                >
+                  <span className="flex items-center gap-1.5"><Languages className="w-4 h-4" /> {locale}</span>
+                </button>
+              )}
+            </div>
+            <div className="w-[40px] h-[40px] flex items-center justify-center">
+              {mounted && (
+                <button 
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   className="p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/80 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
-                  title={`Toggle to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                  title={theme === 'dark' ? t('header.toggle_light') : t('header.toggle_dark')}
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>

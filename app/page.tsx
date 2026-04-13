@@ -11,6 +11,7 @@ import { potholes as allPotholes } from '@/lib/mock-data';
 import { PotholeCluster, FilterState, Status } from '@/lib/types';
 import { LayoutGrid, Map as MapIcon, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/components/providers/language-provider';
 
 // Dynamically import map to avoid SSR issues
 const PriorityMap = dynamic(() => import('@/components/dashboard/priority-map'), { 
@@ -19,6 +20,8 @@ const PriorityMap = dynamic(() => import('@/components/dashboard/priority-map'),
 });
 
 export default function OverviewPage() {
+  const { t } = useLanguage();
+  
   const [filters, setFilters] = useState<FilterState>({
     state: 'all',
     city: 'all',
@@ -85,18 +88,18 @@ export default function OverviewPage() {
           animate={{ opacity: 1, x: 0 }}
         >
           <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest mb-1.5">
-            <LayoutGrid className="w-3 h-3" /> Dashboard
+            <LayoutGrid className="w-3 h-3" /> {t('app.title')}
             <ChevronRight className="w-3 h-3 text-slate-300 dark:text-slate-600" />
-            <span className="text-slate-400 dark:text-slate-500">Overview</span>
+            <span className="text-slate-400 dark:text-slate-500">{t('dashboard.overview')}</span>
           </div>
-          <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">System Control Panel</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium mt-1">Monitoring civic infrastructure health across the network</p>
+          <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{t('app.subtitle')}</h1>
+          <p className="text-slate-500 dark:text-slate-400 font-medium mt-1">{t('dashboard.overview_subtitle')}</p>
         </motion.div>
         
         <div className="flex items-center gap-3">
            <div className="flex flex-col items-end leading-tight mr-2 hidden sm:flex">
-             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase">Last Updated</span>
-             <span className="text-sm font-bold text-slate-600 dark:text-slate-300">Just Now</span>
+             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase">{t('dashboard.kpi.online')}</span>
+             <span className="text-sm font-bold text-slate-600 dark:text-slate-300">{t('dashboard.kpi.active_vehicles')}</span>
            </div>
            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-sm shadow-emerald-200" />
         </div>
@@ -120,7 +123,7 @@ export default function OverviewPage() {
         >
           <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm pointer-events-none">
             <MapIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-tighter">Live Spatial Map</span>
+            <span className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-tighter">{t('dashboard.map.title')}</span>
           </div>
           <PriorityMap 
             data={filteredData} 

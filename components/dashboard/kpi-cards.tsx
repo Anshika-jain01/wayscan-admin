@@ -11,12 +11,13 @@ import {
   TrendingDown
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/components/providers/language-provider';
 import { cn } from '@/lib/utils';
 import { mockDashboardStats } from '@/lib/mock-data';
 
-const kpis = [
+const getKpis = (t: any) => [
   {
-    title: 'Total Active Potholes',
+    title: t('dashboard.kpi.total_potholes'),
     value: mockDashboardStats.totalActive,
     trend: '+12%',
     trendUp: true,
@@ -24,7 +25,7 @@ const kpis = [
     color: 'blue',
   },
   {
-    title: 'Critical Hazards (High)',
+    title: t('dashboard.kpi.critical_priorities'),
     value: mockDashboardStats.criticalHazards,
     trend: '-5%',
     trendUp: false,
@@ -32,7 +33,7 @@ const kpis = [
     color: 'red',
   },
   {
-    title: 'Repaired This Month',
+    title: t('dashboard.kpi.repaired_this_week'),
     value: mockDashboardStats.repairedThisMonth,
     trend: '+18%',
     trendUp: true,
@@ -40,7 +41,7 @@ const kpis = [
     color: 'green',
   },
   {
-    title: 'Avg. Resolution Time',
+    title: t('dashboard.kpi.avg_resolution_time'),
     value: `${mockDashboardStats.avgResolutionTime} Days`,
     trend: '-0.4d',
     trendUp: false,
@@ -48,7 +49,7 @@ const kpis = [
     color: 'purple',
   },
   {
-    title: 'Pending Offline Sync',
+    title: t('dashboard.kpi.pending_sync'),
     value: mockDashboardStats.pendingSync,
     trend: 'Queue',
     trendUp: true,
@@ -74,6 +75,9 @@ const iconVariants: Record<string, string> = {
 };
 
 export default function KPICards() {
+  const { t } = useLanguage();
+  const kpis = getKpis(t);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
       {kpis.map((kpi, idx) => (

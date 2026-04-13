@@ -18,20 +18,22 @@ import {
   MapPin
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/components/providers/language-provider';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { name: 'Overview', href: '/', icon: LayoutDashboard },
-  { name: 'Heatmap', href: '/heatmap', icon: MapIcon },
-  { name: 'Reports', href: '/reports', icon: FileText },
-  { name: 'Work Orders', href: '/work-orders', icon: Wrench },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
-  { name: 'Sync Status', href: '/sync-status', icon: RefreshCw, badge: 23 },
-  { name: 'User Management', href: '/users', icon: Users },
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { key: 'dashboard', defaultName: 'Overview', href: '/', icon: LayoutDashboard },
+  { key: 'live_map', defaultName: 'Heatmap', href: '/heatmap', icon: MapIcon },
+  { key: 'reports', defaultName: 'Reports', href: '/reports', icon: FileText },
+  { key: 'work_orders', defaultName: 'Work Orders', href: '/work-orders', icon: Wrench },
+  { key: 'analytics', defaultName: 'Analytics', href: '/analytics', icon: BarChart3 },
+  { key: 'sync_status', defaultName: 'Sync Status', href: '/sync-status', icon: RefreshCw, badge: 23 },
+  { key: 'user_management', defaultName: 'User Management', href: '/users', icon: Users },
+  { key: 'settings', defaultName: 'Settings', href: '/settings', icon: Settings },
 ];
 
 export default function Sidebar() {
+  const { t } = useLanguage();
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -85,7 +87,8 @@ export default function Sidebar() {
                   animate={{ opacity: 1, x: 0 }}
                   className="whitespace-nowrap flex-1"
                 >
-                  {item.name}
+                  {t(`nav.${item.key}`, undefined)}
+                  {/* Fallback handled in provider if missing, but we'll ensure they exist */}
                 </motion.span>
               )}
 
@@ -117,7 +120,7 @@ export default function Sidebar() {
               AD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">Admin User</p>
+              <p className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">{t('nav.admin_user')}</p>
               <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">admin@wayscan.gov.in</p>
             </div>
           </div>
