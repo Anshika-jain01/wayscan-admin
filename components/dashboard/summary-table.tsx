@@ -13,15 +13,15 @@ interface SummaryTableProps {
 
 export default function SummaryTable({ data, selectedId, onSelect }: SummaryTableProps) {
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm h-full flex flex-col">
-      <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm h-full flex flex-col">
+      <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
             <Users className="w-4 h-4" />
           </div>
-          <h3 className="font-bold text-slate-800">Recent Detections</h3>
+          <h3 className="font-bold text-slate-800 dark:text-slate-100">Recent Detections</h3>
         </div>
-        <span className="text-[10px] font-black text-slate-400 uppercase bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
+        <span className="text-[10px] font-black text-slate-400 uppercase bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-md border border-slate-100 dark:border-slate-700">
           Showing {data.length} reports
         </span>
       </div>
@@ -33,18 +33,18 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4 border border-slate-100">
                 <MapPin className="text-slate-200 w-8 h-8" />
               </div>
-              <p className="font-bold text-slate-400">No reports found for selected filters</p>
+              <p className="font-bold text-slate-400 dark:text-slate-500">No reports found for selected filters</p>
             </div>
           ) : (
-            <div className="divide-y divide-slate-50">
+            <div className="divide-y divide-slate-50 dark:divide-slate-800/50">
               {data.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => onSelect(item)}
                   className={cn(
-                    "w-full flex items-start text-left p-4 transition-all hover:bg-slate-50 group border-l-4",
+                    "w-full flex items-start text-left p-4 transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50 group border-l-4",
                     selectedId === item.id 
-                      ? "bg-blue-50/50 border-blue-500" 
+                      ? "bg-blue-50/50 dark:bg-blue-900/20 border-blue-500" 
                       : "border-transparent"
                   )}
                 >
@@ -66,7 +66,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
                       </span>
                     </div>
                     
-                    <h4 className="font-bold text-slate-800 text-sm truncate mb-1">
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm truncate mb-1">
                       {item.locationName}
                     </h4>
                     
@@ -86,7 +86,7 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
                     </div>
                   </div>
                   
-                  <div className="w-8 h-8 rounded-full border border-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-white group-hover:text-blue-500 group-hover:border-blue-100 transition-all">
+                  <div className="w-8 h-8 rounded-full border border-slate-100 dark:border-slate-700 flex items-center justify-center text-slate-300 dark:text-slate-600 group-hover:bg-white dark:group-hover:bg-slate-800 group-hover:text-blue-500 group-hover:border-blue-100 dark:group-hover:border-blue-900/50 transition-all">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </button>
@@ -97,8 +97,8 @@ export default function SummaryTable({ data, selectedId, onSelect }: SummaryTabl
       </div>
 
       {data.length > 0 && (
-        <div className="p-3 border-t border-slate-100">
-           <button className="w-full py-2.5 bg-slate-50 hover:bg-slate-100 rounded-xl text-xs font-black text-slate-500 uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
+        <div className="p-3 border-t border-slate-100 dark:border-slate-800">
+           <button className="w-full py-2.5 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl text-xs font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
              View Full Report <ExternalLink className="w-3 h-3" />
            </button>
         </div>

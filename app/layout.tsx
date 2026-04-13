@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Sidebar from '@/components/layout/sidebar';
 import Header from '@/components/layout/header';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 
 export const metadata: Metadata = {
   title: 'WayScan | Smart City Admin Dashboard',
@@ -15,19 +16,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-50 font-sans antialiased text-slate-800">
-        <div className="flex h-screen overflow-hidden bg-slate-50/50">
-          <Sidebar />
-          <div className="flex flex-col flex-1 overflow-hidden relative">
-            <Header />
-            <main className="flex-1 overflow-y-auto p-4 md:p-8 pt-6">
-              <div className="max-w-[1600px] mx-auto space-y-6">
-                {children}
-              </div>
-            </main>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-slate-50 dark:bg-slate-950 font-sans antialiased text-slate-800 dark:text-slate-50">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <div className="flex h-screen overflow-hidden bg-slate-50/50 dark:bg-slate-900/50">
+            <Sidebar />
+            <div className="flex flex-col flex-1 overflow-hidden relative">
+              <Header />
+              <main className="flex-1 overflow-y-auto p-4 md:p-8 pt-6">
+                <div className="max-w-[1600px] mx-auto space-y-6">
+                  {children}
+                </div>
+              </main>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -84,19 +84,19 @@ export default function OverviewPage() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
-          <div className="flex items-center gap-2 text-blue-600 text-xs font-black uppercase tracking-widest mb-1.5">
+          <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 text-xs font-black uppercase tracking-widest mb-1.5">
             <LayoutGrid className="w-3 h-3" /> Dashboard
-            <ChevronRight className="w-3 h-3 text-slate-300" />
-            <span className="text-slate-400">Overview</span>
+            <ChevronRight className="w-3 h-3 text-slate-300 dark:text-slate-600" />
+            <span className="text-slate-400 dark:text-slate-500">Overview</span>
           </div>
-          <h1 className="text-4xl font-black text-slate-800 tracking-tight">System Control Panel</h1>
-          <p className="text-slate-500 font-medium mt-1">Monitoring civic infrastructure health across the network</p>
+          <h1 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight">System Control Panel</h1>
+          <p className="text-slate-500 dark:text-slate-400 font-medium mt-1">Monitoring civic infrastructure health across the network</p>
         </motion.div>
         
         <div className="flex items-center gap-3">
            <div className="flex flex-col items-end leading-tight mr-2 hidden sm:flex">
-             <span className="text-[10px] font-black text-slate-400 uppercase">Last Updated</span>
-             <span className="text-sm font-bold text-slate-600">Just Now</span>
+             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase">Last Updated</span>
+             <span className="text-sm font-bold text-slate-600 dark:text-slate-300">Just Now</span>
            </div>
            <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-sm shadow-emerald-200" />
         </div>
@@ -116,11 +116,11 @@ export default function OverviewPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="xl:col-span-3 bg-white border border-slate-200 rounded-3xl p-3 shadow-md group relative overflow-hidden"
+          className="xl:col-span-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-3 shadow-md group relative overflow-hidden"
         >
-          <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-white/90 backdrop-blur px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm pointer-events-none">
-            <MapIcon className="w-4 h-4 text-blue-600" />
-            <span className="text-xs font-black text-slate-700 uppercase tracking-tighter">Live Spatial Map</span>
+          <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm pointer-events-none">
+            <MapIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <span className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-tighter">Live Spatial Map</span>
           </div>
           <PriorityMap 
             data={filteredData} 

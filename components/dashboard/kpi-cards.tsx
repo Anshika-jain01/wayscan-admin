@@ -82,7 +82,7 @@ export default function KPICards() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: idx * 0.1 }}
-          className="bg-white border border-slate-200/60 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group cursor-default"
+          className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 group cursor-default"
         >
           <div className="flex items-start justify-between mb-4">
             <div className={cn(
@@ -93,7 +93,9 @@ export default function KPICards() {
             </div>
             <div className={cn(
               "px-2.5 py-1 rounded-full text-[10px] font-extrabold flex items-center gap-1 border transition-colors",
-              kpi.trendUp ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-red-50 text-red-600 border-red-100"
+              kpi.trendUp 
+                ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/50" 
+                : "bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 border-red-100 dark:border-red-900/50"
             )}>
               {kpi.trendUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
               {kpi.trend}
@@ -101,9 +103,9 @@ export default function KPICards() {
           </div>
           
           <div className="space-y-1">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider">{kpi.title}</h3>
+            <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{kpi.title}</h3>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-black text-slate-800 tracking-tight">{kpi.value}</span>
+              <span className="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{kpi.value}</span>
             </div>
           </div>
           

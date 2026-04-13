@@ -31,15 +31,15 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
   const [currentImage, setCurrentImage] = useState(0);
 
   const statusColors = {
-    reported: 'bg-orange-50 text-orange-700 border-orange-200',
-    'in-progress': 'bg-blue-50 text-blue-700 border-blue-200',
-    repaired: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    reported: 'bg-orange-50 dark:bg-orange-950/30 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-900/50',
+    'in-progress': 'bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-900/50',
+    repaired: 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50',
   };
 
   const priorityColors = {
-    high: 'text-red-600 bg-red-50',
-    medium: 'text-orange-600 bg-orange-50',
-    low: 'text-emerald-600 bg-emerald-50',
+    high: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-900/50',
+    medium: 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-900/50',
+    low: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50',
   };
 
   return (
@@ -58,12 +58,12 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="relative w-full max-w-5xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row"
+        className="relative w-full max-w-5xl bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row"
       >
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 z-30 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md border border-white/20 transition-all md:text-slate-400 md:hover:bg-slate-100 md:border-slate-200 md:bg-white"
+          className="absolute top-6 right-6 z-30 p-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md border border-white/20 transition-all md:text-slate-400 md:dark:text-slate-400 md:hover:bg-slate-100 md:dark:hover:bg-slate-800 md:border-slate-200 md:dark:border-slate-700 md:bg-white md:dark:bg-slate-900"
         >
           <X className="w-5 h-5" />
         </button>
@@ -145,7 +145,7 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
         </div>
 
         {/* Info Section */}
-        <div className="md:w-1/2 p-6 md:p-10 flex flex-col max-h-[90vh] overflow-y-auto custom-scrollbar bg-white">
+        <div className="md:w-1/2 p-6 md:p-10 flex flex-col max-h-[90vh] overflow-y-auto custom-scrollbar bg-white dark:bg-slate-900">
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
                <span className={cn("text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full border", statusColors[pothole.status])}>
@@ -156,7 +156,7 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
                </span>
             </div>
             
-            <h2 className="text-4xl font-black text-slate-800 tracking-tight leading-none mb-3">
+             <h2 className="text-4xl font-black text-slate-800 dark:text-slate-100 tracking-tight leading-none mb-3">
               {pothole.locationName}
             </h2>
             <div className="flex items-center gap-4 text-slate-400 font-bold text-xs">
@@ -167,36 +167,36 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="bg-blue-50/50 p-5 rounded-3xl border border-blue-100/50 group/stat">
-               <div className="flex items-center gap-2 text-blue-600/60 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-blue-600">
+            <div className="bg-blue-50/50 dark:bg-blue-900/20 p-5 rounded-3xl border border-blue-100/50 dark:border-blue-800/30 group/stat">
+               <div className="flex items-center gap-2 text-blue-600/60 dark:text-blue-400/80 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-blue-600 dark:group-hover/stat:text-blue-400">
                  <Users className="w-3.5 h-3.5" /> Unique Vehicles
                </div>
-               <div className="text-3xl font-black text-slate-800">{pothole.uniqueVehicleCount}</div>
-               <p className="text-[10px] font-bold text-blue-400 mt-1 uppercase">Primary Priority Driver</p>
+               <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{pothole.uniqueVehicleCount}</div>
+               <p className="text-[10px] font-bold text-blue-400 dark:text-blue-500 mt-1 uppercase">Primary Priority Driver</p>
             </div>
-            <div className="bg-slate-50 p-5 rounded-3xl border border-slate-100 group/stat">
-               <div className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-slate-600">
+            <div className="bg-slate-50 dark:bg-slate-800 p-5 rounded-3xl border border-slate-100 dark:border-slate-700 group/stat">
+               <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-widest mb-1.5 transition-colors group-hover/stat:text-slate-600 dark:group-hover/stat:text-slate-400">
                  <Layers className="w-3.5 h-3.5" /> Incident Cluster
                </div>
-               <div className="text-3xl font-black text-slate-800">{pothole.totalReports}</div>
-               <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">Total Reports Sweded</p>
+               <div className="text-3xl font-black text-slate-800 dark:text-slate-100">{pothole.totalReports}</div>
+               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase">Total Reports Sweded</p>
             </div>
           </div>
 
           <div className="space-y-6 mb-10 text-sm">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Clock className="w-4 h-4" /> First Detected</span>
-               <span className="font-bold text-slate-700">{formatDate(pothole.firstDetected)}</span>
+               <span className="font-bold text-slate-700 dark:text-slate-300">{formatDate(pothole.firstDetected)}</span>
             </div>
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                <span className="font-bold text-slate-400 flex items-center gap-2 capitalize"><Navigation className="w-4 h-4" /> Assigned Team</span>
-               <span className="font-bold text-blue-600">{pothole.assignedTeam || 'Unassigned'}</span>
+               <span className="font-bold text-blue-600 dark:text-blue-400">{pothole.assignedTeam || 'Unassigned'}</span>
             </div>
             <div className="pt-2">
-               <h4 className="font-black text-slate-800 text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
+               <h4 className="font-black text-slate-800 dark:text-slate-200 text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
                  <CheckCircle className="w-4 h-4 text-emerald-500" /> Administrative Notes
                </h4>
-               <p className="p-4 bg-slate-50 rounded-2xl text-slate-600 font-medium italic border border-slate-100">
+               <p className="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl text-slate-600 dark:text-slate-300 font-medium italic border border-slate-100 dark:border-slate-700">
                  "{pothole.notes || 'No administrative notes added yet.'}"
                </p>
             </div>
@@ -205,10 +205,10 @@ export default function DetailModal({ pothole, onClose, onStatusChange }: Detail
           <div className="mt-auto flex flex-col sm:flex-row gap-3">
              <div className="flex-1 space-y-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Change Status</label>
-                <select 
+                 <select 
                   value={pothole.status}
                   onChange={(e) => onStatusChange(pothole.id, e.target.value as Status)}
-                  className="w-full h-12 bg-white border border-slate-200 rounded-xl px-4 text-sm font-bold text-slate-700 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-sm"
+                  className="w-full h-12 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm font-bold text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all shadow-sm"
                 >
                   <option value="reported">Reported</option>
                   <option value="in-progress">In Progress</option>

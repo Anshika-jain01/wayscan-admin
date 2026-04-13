@@ -31,25 +31,25 @@ export default function TrendChart() {
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm"
+      className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[2rem] p-8 shadow-sm"
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-2 mb-1">
-             <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+             <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
                 <BarChart3 className="w-4 h-4" />
              </div>
-             <h3 className="text-xl font-black text-slate-800">System Performance Trend</h3>
+             <h3 className="text-xl font-black text-slate-800 dark:text-slate-100">System Performance Trend</h3>
           </div>
-          <p className="text-sm font-semibold text-slate-400">Comparing weekly detections vs successful resolutions</p>
+          <p className="text-sm font-semibold text-slate-400 dark:text-slate-500">Comparing weekly detections vs successful resolutions</p>
         </div>
         
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl">
+          <div className="px-4 py-2 bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700/50 rounded-xl">
              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Efficiency Rate</div>
-             <div className="text-sm font-bold text-slate-700 flex items-center gap-2">
-                <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
-                84.2% <span className="text-emerald-500 font-extrabold">+2.1%</span>
+             <div className="text-sm font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                <TrendingUp className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
+                84.2% <span className="text-emerald-500 dark:text-emerald-400 font-extrabold">+2.1%</span>
              </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function TrendChart() {
         </ResponsiveContainer>
       </div>
       
-      <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between text-xs font-bold text-slate-400">
+      <div className="mt-8 pt-6 border-t border-slate-50 dark:border-slate-800/50 flex items-center justify-between text-xs font-bold text-slate-400">
          <div className="flex items-center gap-4">
             <div className="flex items-center gap-1.5">
                <div className="w-2 h-2 rounded-full bg-blue-500" />

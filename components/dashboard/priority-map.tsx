@@ -45,9 +45,9 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
 
   if (!isMounted || !L) {
     return (
-      <div className="w-full h-full bg-slate-100 rounded-3xl flex flex-col items-center justify-center border-2 border-white shadow-inner animate-pulse">
-        <Navigation className="w-12 h-12 text-slate-300 animate-bounce" />
-        <p className="mt-4 font-bold text-slate-400 capitalize">Initializing Map Engine...</p>
+      <div className="w-full h-full bg-slate-100 dark:bg-slate-800/50 rounded-3xl flex flex-col items-center justify-center border-2 border-white dark:border-slate-800 shadow-inner animate-pulse">
+        <Navigation className="w-12 h-12 text-slate-300 dark:text-slate-600 animate-bounce" />
+        <p className="mt-4 font-bold text-slate-400 dark:text-slate-500 capitalize">Initializing Map Engine...</p>
       </div>
     );
   }
@@ -128,20 +128,20 @@ export default function PriorityMap({ data, selectedId, onMarkerClick }: Priorit
       </MapContainer>
 
       {/* Map Legend Overlay */}
-      <div className="absolute bottom-6 left-6 z-20 bg-white/90 backdrop-blur shadow-xl border border-slate-200 rounded-2xl p-4 hidden md:block">
-        <h5 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Priority Map Legend</h5>
+      <div className="absolute bottom-6 left-6 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl p-4 hidden md:block">
+        <h5 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Priority Map Legend</h5>
         <div className="space-y-2.5">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm shadow-red-200" />
-            <span className="text-xs font-bold text-slate-700">High (10+ Vehicles)</span>
+            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm shadow-red-200 dark:shadow-red-900/50" />
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">High (10+ Vehicles)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-orange-500 shadow-sm shadow-orange-200" />
-            <span className="text-xs font-bold text-slate-700">Medium (4-9 Vehicles)</span>
+            <div className="w-3 h-3 rounded-full bg-orange-500 shadow-sm shadow-orange-200 dark:shadow-orange-900/50" />
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Medium (4-9 Vehicles)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-sm shadow-emerald-200" />
-            <span className="text-xs font-bold text-slate-700">Low (1-3 Vehicles)</span>
+            <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-sm shadow-emerald-200 dark:shadow-emerald-900/50" />
+            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Low (1-3 Vehicles)</span>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ import {
   LogOut,
   MapPin
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -39,21 +39,21 @@ export default function Sidebar() {
     <motion.aside
       initial={false}
       animate={{ width: collapsed ? 80 : 280 }}
-      className="relative flex flex-col h-full bg-white border-r border-slate-200 shadow-sm z-30"
+      className="relative flex flex-col h-full bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm z-30"
     >
       {/* Logo Section */}
-      <div className="flex h-20 items-center px-6 border-b border-slate-100">
+      <div className="flex h-20 items-center px-6 border-b border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+          <div className="flex-shrink-0 w-10 h-10 bg-blue-600 dark:bg-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200 dark:shadow-none">
             <MapPin className="text-white w-6 h-6" />
           </div>
           {!collapsed && (
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-xl font-bold tracking-tight text-slate-800"
+              className="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100"
             >
-              Way<span className="text-blue-600">Scan</span>
+              Way<span className="text-blue-600 dark:text-blue-400">Scan</span>
             </motion.span>
           )}
         </div>
@@ -70,13 +70,13 @@ export default function Sidebar() {
               className={cn(
                 "group flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 relative",
                 isActive 
-                  ? "bg-blue-50 text-blue-600 font-semibold shadow-sm" 
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold shadow-sm dark:shadow-none" 
+                  : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-800 dark:hover:text-slate-200"
               )}
             >
               <item.icon className={cn(
                 "w-5 h-5 transition-transform group-hover:scale-110",
-                isActive ? "text-blue-600" : "text-slate-400"
+                isActive ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"
               )} />
               
               {!collapsed && (
@@ -91,7 +91,7 @@ export default function Sidebar() {
 
               {item.badge && item.badge > 0 && (
                 <span className={cn(
-                  "flex items-center justify-center rounded-full bg-orange-500 text-white text-[10px] font-bold leading-none px-1.5 py-1",
+                  "flex items-center justify-center rounded-full bg-orange-500 dark:bg-orange-600 text-white text-[10px] font-bold leading-none px-1.5 py-1",
                   collapsed ? "absolute -top-1 -right-1" : "ml-auto"
                 )}>
                   {item.badge}
@@ -101,7 +101,7 @@ export default function Sidebar() {
               {isActive && (
                 <motion.div
                   layoutId="active-indicator"
-                  className="absolute left-0 w-1 h-6 bg-blue-600 rounded-r-full"
+                  className="absolute left-0 w-1 h-6 bg-blue-600 dark:bg-blue-500 rounded-r-full"
                 />
               )}
             </Link>
@@ -110,21 +110,21 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer / Profile */}
-      <div className="p-4 border-t border-slate-100">
+      <div className="p-4 border-t border-slate-100 dark:border-slate-800">
         {!collapsed && (
-          <div className="bg-slate-50 rounded-2xl p-3 mb-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm overflow-hidden flex items-center justify-center text-slate-500 font-bold">
+          <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-3 mb-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-white dark:border-slate-800 shadow-sm overflow-hidden flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold">
               AD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-slate-800 truncate">Admin User</p>
-              <p className="text-[10px] text-slate-500 truncate">admin@wayscan.gov.in</p>
+              <p className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">Admin User</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">admin@wayscan.gov.in</p>
             </div>
           </div>
         )}
         
         <button className={cn(
-          "w-full flex items-center gap-3 px-3 py-3 rounded-xl text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors",
+          "w-full flex items-center gap-3 px-3 py-3 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 dark:hover:text-red-400 transition-colors",
           collapsed && "justify-center"
         )}>
           <LogOut className="w-5 h-5" />
@@ -135,7 +135,7 @@ export default function Sidebar() {
       {/* Collapse Toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-24 bg-white border border-slate-200 rounded-full p-1 shadow-md hover:bg-slate-50 text-slate-400 hover:text-slate-600 z-50 transition-colors"
+        className="absolute -right-3 top-24 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full p-1 shadow-md dark:shadow-none hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 z-50 transition-colors"
       >
         {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
       </button>
