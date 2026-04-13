@@ -1,0 +1,130 @@
+'use client';
+
+import React from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Cell
+} from 'recharts';
+import { motion } from 'framer-motion';
+import { BarChart3, ArrowUpRight, TrendingUp } from 'lucide-react';
+
+const data = [
+  { name: 'Week 1', detected: 45, repaired: 32 },
+  { name: 'Week 2', detected: 52, repaired: 41 },
+  { name: 'Week 3', detected: 38, repaired: 44 },
+  { name: 'Week 4', detected: 65, repaired: 52 },
+  { name: 'Week 5', detected: 48, repaired: 58 },
+  { name: 'Week 6', detected: 58, repaired: 49 },
+  { name: 'Week 7', detected: 72, repaired: 61 },
+  { name: 'Week 8', detected: 60, repaired: 68 },
+];
+
+export default function TrendChart() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm"
+    >
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+             <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <BarChart3 className="w-4 h-4" />
+             </div>
+             <h3 className="text-xl font-black text-slate-800">System Performance Trend</h3>
+          </div>
+          <p className="text-sm font-semibold text-slate-400">Comparing weekly detections vs successful resolutions</p>
+        </div>
+        
+        <div className="flex items-center gap-3">
+          <div className="px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl">
+             <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">Efficiency Rate</div>
+             <div className="text-sm font-bold text-slate-700 flex items-center gap-2">
+                <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
+                84.2% <span className="text-emerald-500 font-extrabold">+2.1%</span>
+             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-[350px] w-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+            barGap={8}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+            <XAxis 
+              dataKey="name" 
+              axisLine={false} 
+              tickLine={false} 
+              tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 700 }}
+              dy={15}
+            />
+            <YAxis 
+              axisLine={false} 
+              tickLine={false} 
+              tick={{ fill: '#94a3b8', fontSize: 11, fontWeight: 700 }}
+              dx={-10}
+            />
+            <Tooltip
+              contentStyle={{ 
+                backgroundColor: '#fff', 
+                borderRadius: '16px', 
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                padding: '12px'
+              }}
+              cursor={{ fill: '#f8fafc' }}
+            />
+            <Legend 
+              verticalAlign="top" 
+              align="right" 
+              iconType="circle"
+              wrapperStyle={{ paddingBottom: '30px', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+            />
+            <Bar 
+              name="New Detections" 
+              dataKey="detected" 
+              fill="#3b82f6" 
+              radius={[6, 6, 0, 0]} 
+              barSize={20}
+            />
+            <Bar 
+              name="Repaired Issues" 
+              dataKey="repaired" 
+              fill="#10b981" 
+              radius={[6, 6, 0, 0]} 
+              barSize={20}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      
+      <div className="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between text-xs font-bold text-slate-400">
+         <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5">
+               <div className="w-2 h-2 rounded-full bg-blue-500" />
+               Current AI Alert Threshold: 5m
+            </div>
+            <div className="flex items-center gap-1.5">
+               <div className="w-2 h-2 rounded-full bg-emerald-500" />
+               Target SLA: 72 Hours
+            </div>
+         </div>
+         <button className="text-blue-600 hover:text-blue-700 font-black uppercase tracking-widest flex items-center gap-1">
+            Download Report <ArrowUpRight className="w-3.5 h-3.5" />
+         </button>
+      </div>
+    </motion.div>
+  );
+}
