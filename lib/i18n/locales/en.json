@@ -36,7 +36,7 @@
       "vs_last_week": "vs last week",
       "needs_dispatch": "Needs dispatch",
       "online": "Online",
-      "avg_resolution_time": "Avg. Resolution Time",
+      "avg_resolution_time": "Avg. Resolution Time (days)",
       "pending_sync": "Pending Offline Sync"
     },
     "filters": {

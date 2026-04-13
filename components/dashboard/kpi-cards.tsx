@@ -42,7 +42,7 @@ const getKpis = (t: any) => [
   },
   {
     title: t('dashboard.kpi.avg_resolution_time'),
-    value: `${mockDashboardStats.avgResolutionTime} Days`,
+    value: `${mockDashboardStats.avgResolutionTime}`,
     trend: '-0.4d',
     trendUp: false,
     icon: Clock,
